@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Credentials</title>
+    <link rel="stylesheet" href="/static/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script src="/static/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+    <link rel="shortcut icon" href="/media/Mail_(iOS).svg.png" type="image/x-icon">
+
+</head>
+<body style="background-image: url(/media/mail_dark_bg.jpg);">
+    <div class="container">
+        <div class="navbar navbar-expand-lg text-white fw-bolder">
+            <a href="{% url 'index' %}"><img src="/media/Mail_(iOS).svg.png" width="75px" height="75px"></a>Recover Credentials
+        </div>
+        <div class="row">
+            <div class="col-6 bg-success-subtle">
+                <form action="{% url 'recover_id' %}" method="post">
+                    {% csrf_token %}
+                <ul class="p-3">
+                   <li class="p-2 text-danger">Did You Forgot Your User Name ?</li>
+                   <p><input type="date" name="dob" placeholder="Date of Birth" class="form-control p-2"></p>
+                   <p><input type="text" name="mobile" placeholder="Mobile Number +91 - - - - - - - - -" class="form-control p-2"></p>
+                   <p><input type="submit" value="Find My User ID" class="btn btn-success "></p>
+                </ul>
+                </form>
+            </div>
+            <div class="col-6 bg-primary-subtle">
+                <form action="{% url 'start_password_reset' %}" method="post">
+                    {% csrf_token %}
+                <ul class="p-3">
+                    <li class="p-2 text-danger">Did You Forgot Your Password ?</li>
+                    <p><input type="text" name="user_name" placeholder="User Name" class="form-control p-2"></p>
+                    <p><input type="date" name="dob" placeholder="Date of Birth" class="form-control p-2"></p>
+                    <p><input type="text" name="mobile" placeholder="Mobile Number +91 - - - - - - - - -" class="form-control p-2"></p>
+                    <p><input type="submit" value="Next" class="btn btn-danger"></p>
+                 </ul>     
+                </form>     
+            </div>
+        </div>
+    </div>  
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}
+    {% endif %}  
+</body>
+</html>

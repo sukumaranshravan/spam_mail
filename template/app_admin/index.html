@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In Page</title>
+    <link rel="stylesheet" href="/static/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script src="/static/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="navbar navbar-expand-lg text-dark fw-bolder">
+            <img src="/media/bg_wall.jpg" width="5000px" height="200px">
+        </div>
+        <ul>
+            <li><a href="{% url 'log_in' %}">Log In</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'view_country' %}">See Our Network</a></li>
+        </ul>
+    </div>
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>

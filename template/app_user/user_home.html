@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/static/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script src="/static/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+    <link rel="shortcut icon" href="/media/Mail_(iOS).svg.png" type="image/x-icon">
+
+</head>
+<body style="background-image: url(/media/dark-background-stonewall-30040230.webp);">
+    <div class="container">
+        <div class="navbar navbar-expand-lg text-white fw-bolder">
+            <img src="/media/Mail_(iOS).svg.png" alt="no picture" height="50px" width="50px">
+            <h7 class="text-bg-success">Welcome :{{you}}</h7>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'log_out' %}" class="text-white text-xxl-end">Sign Out</a>
+        </div>
+        <div class="row">
+            <div class="col-2 bg-dark-subtle">
+                <ul>
+                    <li><a href="{% url 'compose' %}">Compose</a></li>
+                    <li><a href="{% url 'inbox' %}">Inbox</a></li>
+                    <li><a href="{% url 'sent' %}">Sent</a></li>
+                    <li><a href="{% url 'spam' %}">Spam</a></li>
+                    <li><a href="{% url 'trash' %}">Trash</a></li>
+                    <li><a href="{% url 'contact' %}">Contacts</a></li>
+                    <li><a href="{% url 'view_blocklist' %}">Blocklist</a></li>
+                    <li><a href="{% url 'settings' %}">Settings</a>
+                </ul>
+            </div>
+            <div class="col-5 bg bg-white opacity-75">
+                <h6>Add User Age Factor</h6>
+                <form action="{% url 'customer_age_factor' %}" method="post">
+                    {% csrf_token %}
+                <select name="my_factor">
+                    <option value="">----Select----</option>
+                    {% for i in age %}
+                    <option value="{{i.id}}">{{i.factor_name}}</option>
+                    {% endfor %} 
+                </select>    
+                <input type="submit" value="Add Your Age Factor">
+                </form>
+            </div>
+            <div class="col-5 bg bg-white opacity-75">
+                <h4 class="text-primary">Welcome To Via Mail</h4> 
+                <h6 class="text-success">Compose,Share, Connect with your friends, family and business.</h6>  
+                <h6 class="text-danger">Thanks for joining Via Mail</h6>
+                <img src="/media/Mail_(iOS).svg.png"  height="300" width="350" alt="no picture">           
+            </div>                                
+        </div>
+    </div>  
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}
+    {% endif %}  
+</body>
+</html>

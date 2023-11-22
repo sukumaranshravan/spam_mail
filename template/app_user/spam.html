@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important</title>
+    <link rel="stylesheet" href="/static/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script src="/static/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+
+</head>
+<body style="background-image: url(/media/dark-background-stonewall-30040230.webp);">
+    <div class="container">
+        <div class="navbar navbar-expand-lg">
+            <img src="/media/Mail_(iOS).svg.png" width="50px" height="50px" alt=""><h6 class="text-white p-2">&nbsp;&nbsp;&nbsp;Welcome :&nbsp;&nbsp;&nbsp;</h6><b class="text-dark"><a href="{% url 'log_out' %}" class="text-white">Log Out</a>
+        </div>
+        <div class="row">
+            <div class="col-2 bg-dark-subtle">
+                <ul>
+                    <li><a href="{% url 'compose' %}">Compose</a></li>
+                    <li><a href="{% url 'inbox' %}">Inbox</a></li>
+                    <li><a href="{% url 'sent' %}">Sent</a></li>
+                    <li>Spam ({{total}})</li>
+                    <li><a href="{% url 'trash' %}">Trash</a></li>
+                    <li><a href="{% url 'contact' %}">Contacts</a></li>
+                    <li><a href="{% url 'view_blocklist' %}">Blocklist</a></li>
+                    <li><a href="{% url 'settings' %}">Settings</a>
+                </ul>
+            </div>
+            <div class="col-10 bg bg-white p-2">
+                    
+                {% if key == null %}
+                <h5><b>{{msg}}</b></h5>
+                {% else %}
+                
+                {% for i in key %}
+                <form action="{% url 'to_trash' i.id %}" method="post">
+                    {% csrf_token %}
+                <ul class="form-control">                    
+                    <li><input type="checkbox" name="checkbox" value="{{i.id}}">&nbsp;&nbsp;<b>Spam Alert :</b>&nbsp;&nbsp;{{i.sender_id.user_name}}&nbsp;&nbsp; {{i.time}}&nbsp;&nbsp; {{i.date}}&nbsp;&nbsp;<a href="{% url 'read' i.id %}">Read</a>                               
+                    </ul>        
+                {% endfor %}
+                <button>Move to Trash</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
